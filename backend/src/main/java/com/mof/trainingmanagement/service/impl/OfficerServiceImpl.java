@@ -4,6 +4,7 @@ import com.mof.trainingmanagement.dto.request.OfficerRequest;
 import com.mof.trainingmanagement.dto.response.OfficerResponse;
 import com.mof.trainingmanagement.entity.Department;
 import com.mof.trainingmanagement.entity.Officer;
+import com.mof.trainingmanagement.exception.DuplicateOfficerException;
 import com.mof.trainingmanagement.exception.ResourceNotFoundException;
 import com.mof.trainingmanagement.mapper.OfficerMapper;
 import com.mof.trainingmanagement.repository.DepartmentRepository;
@@ -30,6 +31,15 @@ public class OfficerServiceImpl implements OfficerService {
 
     @Override
     public OfficerResponse createOfficer(OfficerRequest request) {
+        if (officerRepository.existsByEmployeeNumber(request.getEmployeeNumber())) {
+            throw new DuplicateOfficerException(
+                    "An officer with employee number '" + request.getEmployeeNumber() + "' already exists.");
+        }
+        if (officerRepository.existsByEmail(request.getEmail())) {
+            throw new DuplicateOfficerException(
+                    "An officer with email '" + request.getEmail() + "' already exists.");
+        }
+
         Department department = departmentRepository.findById(request.getDepartmentId())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Department not found with id: " + request.getDepartmentId()));
