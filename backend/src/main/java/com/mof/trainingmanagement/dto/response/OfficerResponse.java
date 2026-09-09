@@ -1,5 +1,7 @@
 package com.mof.trainingmanagement.dto.response;
 
+import java.time.LocalDate;
+
 public class OfficerResponse {
 
     private Long id;
@@ -8,18 +10,25 @@ public class OfficerResponse {
     private String email;
     private Long departmentId;
     private String departmentName;
+    private String grade;
+    private LocalDate joiningDate;
+    private int yearsOfService;
 
     public OfficerResponse() {
     }
 
     public OfficerResponse(Long id, String employeeNumber, String name, String email,
-                            Long departmentId, String departmentName) {
+            Long departmentId, String departmentName,
+            String grade, LocalDate joiningDate, int yearsOfService) {
         this.id = id;
         this.employeeNumber = employeeNumber;
         this.name = name;
         this.email = email;
         this.departmentId = departmentId;
         this.departmentName = departmentName;
+        this.grade = grade;
+        this.joiningDate = joiningDate;
+        this.yearsOfService = yearsOfService;
     }
 
     public Long getId() {
@@ -68,5 +77,29 @@ public class OfficerResponse {
 
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public LocalDate getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(LocalDate joiningDate) {
+        this.joiningDate = joiningDate;
+    }
+
+    public int getYearsOfService() {
+        return yearsOfService;
+    }
+
+    public void setYearsOfService(int yearsOfService) {
+        this.yearsOfService = yearsOfService;
     }
 }

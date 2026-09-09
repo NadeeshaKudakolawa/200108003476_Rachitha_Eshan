@@ -22,8 +22,8 @@ public class OfficerServiceImpl implements OfficerService {
     private final OfficerMapper officerMapper;
 
     public OfficerServiceImpl(OfficerRepository officerRepository,
-                               DepartmentRepository departmentRepository,
-                               OfficerMapper officerMapper) {
+            DepartmentRepository departmentRepository,
+            OfficerMapper officerMapper) {
         this.officerRepository = officerRepository;
         this.departmentRepository = departmentRepository;
         this.officerMapper = officerMapper;
@@ -48,8 +48,9 @@ public class OfficerServiceImpl implements OfficerService {
                 request.getEmployeeNumber(),
                 request.getName(),
                 request.getEmail(),
-                department
-        );
+                department,
+                request.getGrade(),
+                request.getJoiningDate());
 
         Officer saved = officerRepository.save(officer);
         return officerMapper.toResponse(saved);

@@ -3,6 +3,9 @@ package com.mof.trainingmanagement.dto.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
+import java.time.LocalDate;
 
 public class OfficerRequest {
 
@@ -18,6 +21,28 @@ public class OfficerRequest {
 
     @NotNull(message = "Department ID is required")
     private Long departmentId;
+    @NotBlank(message = "Grade is required")
+    private String grade;
+
+    @NotNull(message = "Joining date is required")
+    @PastOrPresent(message = "Joining date cannot be in the future")
+    private LocalDate joiningDate;
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public LocalDate getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(LocalDate joiningDate) {
+        this.joiningDate = joiningDate;
+    }
 
     public OfficerRequest() {
     }

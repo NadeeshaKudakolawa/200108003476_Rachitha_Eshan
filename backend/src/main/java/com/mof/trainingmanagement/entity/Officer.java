@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table(name = "officers")
@@ -27,6 +29,12 @@ public class Officer {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String grade;
+
+    @Column(name = "joining_date", nullable = false)
+    private LocalDate joiningDate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
@@ -34,11 +42,14 @@ public class Officer {
     public Officer() {
     }
 
-    public Officer(String employeeNumber, String name, String email, Department department) {
+    public Officer(String employeeNumber, String name, String email, Department department,
+            String grade, LocalDate joiningDate) {
         this.employeeNumber = employeeNumber;
         this.name = name;
         this.email = email;
         this.department = department;
+        this.grade = grade;
+        this.joiningDate = joiningDate;
     }
 
     public Long getId() {
@@ -80,4 +91,23 @@ public class Officer {
     public void setDepartment(Department department) {
         this.department = department;
     }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public LocalDate getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(LocalDate joiningDate) {
+        this.joiningDate = joiningDate;
+    }
+    public int getYearsOfService() {
+    return Period.between(joiningDate, LocalDate.now()).getYears();
+}
 }

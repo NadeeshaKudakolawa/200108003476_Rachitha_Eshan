@@ -14,7 +14,9 @@ public class OfficerMapper {
                 officer.getName(),
                 officer.getEmail(),
                 officer.getDepartment().getId(),
-                officer.getDepartment().getName()
-        );
+                officer.getDepartment().getName(),
+                officer.getGrade(),
+                officer.getJoiningDate(),
+                officer.getYearsOfService());
     }
 }
